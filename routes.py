@@ -12,7 +12,6 @@ from datetime import datetime
 from func import validate_user
 from connection import get_connection
 
-
 app = Flask(__name__)
 app.secret_key = 'your_unique_secret_key_here'
 
@@ -36,7 +35,6 @@ def reports():
             return "Database connection error", 500
         cur = conn.cursor()
 
-        # Low stock items query
         cur.execute("""
             SELECT name, 'Electronics' AS category, stock
             FROM electronics
@@ -60,7 +58,6 @@ def reports():
         """)
         low_inventory_items = cur.fetchall()
 
-        # Expired items query
         cur.execute("""
             SELECT name, 'Electronics' AS category, expiry_date
             FROM electronics
@@ -155,9 +152,6 @@ def dashboard():
                            out_of_stock=out_of_stock,
                            low_stock_alerts=low_stock_alerts,
                            low_stock_items=low_stock_items)
-
-
-
 
 @app.route('/clothing')
 def clothing():
@@ -398,7 +392,6 @@ def delete_item(category, item_id):
     except Exception as e:
         print("Error deleting item:", e)
         return "Error deleting item", 500
-
 
 
 if __name__ == "__main__":
