@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Stock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .content {
+            margin: 50px 0;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .content h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .stock-management {
+            margin-bottom: 30px;
+        }
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .stock-table th, .stock-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .stock-table th {
+            background: #4a4a4a;
+        }
+        .stock-table tr:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .low-stock {
+            color: #ff4d4d;
+        }
+        .expired {
+            color: #ff6f61;
+        }
+        .update-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .update-buttons button, .update-buttons a {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            font-size: 16px;
+        }
+        .update-button {
+            background-color: #43e97b;
+            color: white;
+        }
+        .update-button:hover {
+            background-color: #38f9d7;
+            transform: scale(1.05);
+        }
+        .refresh-button {
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .refresh-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Manage Stock</h1>
+</div>
+
+<div class="content">
+    <h2>Update Stock Levels</h2>
+    <form action="/managestock" method="post">
+        <div class="stock-management">
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Current Stock</th>
+                        <th>Update Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in stock_data %}
+                    <tr class="{% if item[2] == 0 %}expired{% elif item[2] < 10 %}low-stock{% endif %}">
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] }}</td>
+                        <td>{{ item[2] }} units</td>
+                        <td>
+                            <input type="number" name="stock" value="{{ item[2] }}" min="0" style="width: 100px;">
+                            <input type="hidden" name="item" value="{{ item[0] }}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="update-buttons">
+            <button class="update-button" type="submit">Update Stock</button>
+            <a class="refresh-button" href="/managestock">Refresh Data</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

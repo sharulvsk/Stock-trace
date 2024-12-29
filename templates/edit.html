@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6f61, #d83a56);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .form-container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+        .form-container h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .form-container label {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container input[type="date"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            resize: none;
+        }
+        .form-container textarea {
+            height: 100px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .form-container .save-button {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+        }
+        .form-container .save-button:hover {
+            background: linear-gradient(135deg, #38f9d7, #43e97b);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .form-container .back-button {
+            background: linear-gradient(135deg, #e94e77, #ec8b63);
+            color: white;
+        }
+        .form-container .back-button:hover {
+            background: linear-gradient(135deg, #ec8b63, #e94e77);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Edit {{ item[1] }}</h1>
+    </div>
+    <div class="form-container">
+        <form action="/edit/{{ category }}/{{ item[0] }}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ item[1] }}" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required>{{ item[2] }}</textarea>
+
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" value="{{ item[3] }}" required>
+
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" value="{{ item[4] }}" required>
+
+            <label for="expiry_date">Expiry Date:</label>
+            <input type="date" id="expiry_date" name="expiry_date" value="{{ item[5] }}" required>
+
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
+        <button class="back-button" onclick="window.location.href='/{{ category }}';">Back to {{ category }}</button>
+    </div>
+</body>
+</html>

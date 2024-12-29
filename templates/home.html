@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, black, red);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: white;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .icon, .login-icon {
+            font-size: 24px;
+            color: white;
+            margin: 0 15px;
+            padding: 10px;
+            border-radius: 50%;
+            transition: border 0.3s ease;
+            cursor: pointer;
+        }
+
+        .icon:hover, .login-icon:hover {
+            border: 2px solid white;
+            background-color: red;
+            color: black;
+        }
+
+        .content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .content h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .content p {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .content a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .content a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -25%;
+            width: 25%;
+            height: 100%;
+            background-color: black;
+            border-radius: 25px 0 0 25px;
+            color: red;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: right 0.5s ease;
+        }
+
+        .menu.open {
+            right: 0;
+        }
+
+        .menu-item {
+            margin: 15px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Stock Tracker</div>
+        <nav class="menu">
+            <a href="dashboard">Dashboard</a>
+            <a href="reports">Reports</a>
+            <a href="managestock">Manage stock</a>
+            <a href="electronics">Electronics</a>
+            <a href="groceries">Groceries</a>
+            <a href="clothing">Clothing</a>
+            <a href="householditems">Household Items</a>
+            <a href="personalcare">Personal Care</a>
+        </nav>
+        <div class="icons">
+            <span class="login-icon" onclick="location.href='login'"><i class="fas fa-sign-in-alt"></i></span> 
+            <span class="icon" id="menu-icon"><i class="fas fa-bars"></i></span> 
+        </div>
+    </header>
+    <div class="content">
+        <h1>Welcome to Stock Tracker</h1>
+        <p>Manage and track your store's inventory efficiently.</p>
+        <a href="login">Get Started</a>
+    </div>
+    <div id="menu" class="menu">
+        <div class="menu-item" onclick="navigateTo('/electronics')">Electronics</div>
+        <div class="menu-item" onclick="navigateTo('/groceries')">Groceries</div>
+        <div class="menu-item" onclick="navigateTo('/clothing')">Clothing</div>
+        <div class="menu-item" onclick="navigateTo('/householditems')">Household Items</div>
+        <div class="menu-item" onclick="navigateTo('/personalcare')">Personal Care</div>
+        <div class="menu-item" onclick="navigateTo('/dashboard')">Dashboard</div>
+        <div class="menu-item" onclick="navigateTo('/reports')">Reports</div>
+        <div class="menu-item" onclick="navigateTo('/managestock')">Manage stock</div>
+    </div>
+    <script>
+        function navigateTo(page) {
+            var menu = document.getElementById('menu');
+            window.location.href = page;  
+            menu.classList.remove('open');  
+        }
+        document.getElementById('menu-icon').onclick = function() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('open');
+        };
+    </script>    
+</body>
+</html>

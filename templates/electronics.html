@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .content {
+            margin: 50px 0;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .content h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .item h3 {
+            margin: 0;
+            font-size: 22px;
+        }
+        .item p {
+            font-size: 16px;
+        }
+        .item-buttons {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .item-buttons button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .edit-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .edit-button:hover {
+            background: linear-gradient(135deg, #38f9d7, #43e97b);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .delete-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #e94e77, #ec8b63);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .delete-button:hover {
+            background: linear-gradient(135deg, #ec8b63, #e94e77);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Electronics</h1>
+</div>
+
+<div class="content">
+    <h2>Manage Electronics</h2>
+    <div class="item-grid">
+        {% for item in items %}
+            <div class="item">
+                <h3>{{ item[1] }}</h3>
+                <p>{{ item[2] }}</p> 
+                <p>Stock: {{ item[3] }} units</p> 
+                <p>Price: ${{ item[4] }}</p> 
+                <p>Expiry Date: {{ item[5] }}</p> 
+                <div class="item-buttons">
+                    <a href="/edit/electronics/{{ item[0] }}" class="edit-button">Edit</a>
+                    <form action="/delete/electronics/{{ item[0] }}" method="post" style="display:inline;">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>  
+    <button class="delete-button" onclick="window.location.href='/home';">Back to Home</button>
+</div>
+
+</body>
+</html>

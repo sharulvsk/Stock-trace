@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #89fffd, #ef32d9);
+            background-size: 200% 200%;
+            animation: gradientAnimation 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .home-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 1200px;
+            width: 100%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .home-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 36px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .overview, .category-panel, .low-stock-alerts {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-size: 24px;
+            color: #4a4a4a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .overview-content, .category-panel-content, .low-stock-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            color: white;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .card-value {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .add-item-btn {
+            background: #8EC5FC;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        .add-item-btn:hover {
+            background: #E0C3FC;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .add-item-btn:active {
+            transform: scale(0.97);
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .table th {
+            background: #f1f1f1;
+        }
+        .low-stock {
+            color: red;
+            font-weight: bold;
+        }
+        .button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #e94e77, #ec8b63);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #ec8b63, #e94e77);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="home-container">
+    <h1>Admin home</h1>
+
+    <div class="overview">
+        <h2 class="section-title">Store Overview</h2>
+        <div class="overview-content">
+            <div class="card">
+                <div class="card-title">Total Items</div>
+                <div class="card-value">{{ total_items }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Categories</div>
+                <div class="card-value">{{ total_categories }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Out of Stock</div>
+                <div class="card-value">{{ out_of_stock }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Low Stock Alerts</div>
+                <div class="card-value">{{ low_stock_alerts }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-panel">
+        <h2 class="section-title">Manage Categories</h2>
+        <div class="category-panel-content">
+            <a href="/additem" class="add-item-btn">Add New Item</a>
+            <a href="/edititem" class="add-item-btn">Edit Items</a>
+            <a href="/removeitem" class="add-item-btn">Remove Items</a>
+        </div>
+    </div>    
+
+    <div class="low-stock-alerts">
+        <h2 class="section-title">Low Stock Alerts</h2>
+        <div class="low-stock-content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Stock Left</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in low_stock_items %}
+                    <tr>
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] }}</td>
+                        <td class="low-stock">{{ item[2] }}</td>
+                        <td><button class="add-item-btn">Restock</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class="button" onclick="window.location.href='/home';">home</button>
+</div>
+
+</body>
+</html>
+
